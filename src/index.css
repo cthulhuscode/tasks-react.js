@@ -239,7 +239,7 @@ aside {
 .mensaje {
   text-align: center;
   font-size: 1.6rem;
-  border-radius: 0;
+  border-radius: 2px;
 }
 .mensaje:hover {
   cursor: default;
@@ -256,7 +256,7 @@ aside {
 .error {
   max-width: 600px;
   margin: 2rem auto 0 auto;
-  background-color: rgb(170, 0, 0);
+  background-color: #c90000;
   color: var(--blanco);
 }
 
