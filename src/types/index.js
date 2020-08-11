@@ -6,3 +6,10 @@ export const ACTUAL_PROJECT = "ACTUAL_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
 
 export const TASKS_PROJECT = "TASKS_PROJECT";
+export const ADD_TASK = "ADD_TASK";
+export const TASK_ERROR = "TASK_ERROR";
+export const DELETE_TASK = "DELETE_TASK";
+export const TASK_STATUS = "TASK_STATUS";
+export const SELECTED_TASK = "SELECTED_TASK";
+export const UPDATE_TASK = "UPDATE_TASK";
+export const CLEAR_SELECTED_TASK = "CLEAR_SELECTED_TASK";
