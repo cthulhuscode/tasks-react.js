@@ -18,6 +18,7 @@ import {
 } from "../../types/index";
 
 const TaskState = (props) => {
+  // States
   const initialState = {
     tasks: [
       { id: 1, name: "Choose platform", status: true, projectId: 1 },
