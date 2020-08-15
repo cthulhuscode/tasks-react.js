@@ -1,14 +1,33 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+// Contexts
 import AlertContext from "../../context/alerts/alertContext";
+import AuthContext from "../../context/authentication/authContext";
 
-const NewAccount = () => {
-  // Project context
+const NewAccount = (props) => {
+  // Alert context
   const alertsContext = useContext(AlertContext);
   const { alert, showAlert } = alertsContext;
 
-  // States
+  // Auth context
+  const authContext = useContext(AuthContext);
+  const { msg, registerUser, isAuthenticated } = authContext;
+
+  // Handle registration, login...
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirect to projects
+      props.history.push("/projects");
+    }
+
+    // Show message
+    if (msg) {
+      showAlert(msg.msg, msg.category);
+    }
+  }, [msg, isAuthenticated, props.history]);
+
+  // State to login
   const [newAccount, setNewAccount] = useState({
     name: "",
     email: "",
@@ -58,6 +77,7 @@ const NewAccount = () => {
     }
 
     // Send it to the action
+    registerUser({ name, email, password });
   };
 
   return (

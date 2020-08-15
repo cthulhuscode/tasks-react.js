@@ -11,11 +11,35 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case SUCCESSFUL_LOGIN:
-    case UNSUCCESSFUL_LOGIN:
     case SUCCESSFUL_REGISTRATION:
-    case UNSUCCESSFUL_REGISTRATION:
-    case GET_USER:
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        isAuthenticated: true,
+        msg: null,
+        charging: false,
+      };
+
     case LOGOUT:
+    case UNSUCCESSFUL_LOGIN:
+    case UNSUCCESSFUL_REGISTRATION:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        user: null,
+        isAuthenticated: null,
+        msg: action.payload,
+        charging: false,
+      };
+
+    case GET_USER:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        charging: false,
+      };
 
     default:
       return state;

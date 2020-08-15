@@ -12,6 +12,19 @@ import Login from "./components/auth/Login";
 import NewAccount from "./components/auth/NewAccount";
 import Projects from "./components/projects/Projects";
 
+// Higher order component
+import PrivateRoute from "./components/routes/PrivateRoute";
+
+// Util token
+import authToken from "./config/authToken";
+
+// Check if there is a token
+// Add token to the header
+const token = localStorage.getItem("token");
+if (token) {
+  authToken(token);
+}
+
 function App() {
   return (
     <div className="App">
@@ -23,7 +36,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/new-account" component={NewAccount} />
-                  <Route exact path="/projects" component={Projects} />
+                  <PrivateRoute exact path="/projects" component={Projects} />
                 </Switch>
               </Router>
             </AuthState>

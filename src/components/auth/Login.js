@@ -1,7 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+// Contexts
+import AlertContext from "../../context/alerts/alertContext";
+import AuthContext from "../../context/authentication/authContext";
+
+const Login = (props) => {
+  // Alert context
+  const alertsContext = useContext(AlertContext);
+  const { alert, showAlert } = alertsContext;
+
+  // Auth context
+  const authContext = useContext(AuthContext);
+  const { msg, isAuthenticated, handleLogin } = authContext;
+
+  // Handle login and send alerts
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirect to projects
+      props.history.push("/projects");
+    }
+
+    // Show message
+    if (msg) {
+      showAlert(msg.msg, msg.category);
+    }
+  }, [msg, isAuthenticated, props.history]);
+
   // States
   const [login, setLogin] = useState({
     email: "",
@@ -24,12 +49,20 @@ const Login = () => {
     e.preventDefault();
 
     // Validar
+    if (email.trim() === "" || password.trim() === "") {
+      showAlert("Todos los campos son obligatorios", "alerta-error");
+    }
 
     // Send it to the action
+    handleLogin({ email, password });
   };
 
   return (
     <div className="form-usuario">
+      {alert ? (
+        <div className={`alerta ${alert.category}`}>{alert.msg}</div>
+      ) : null}
+
       <div className="contenedor-form sombra-dark">
         <h1>Iniciar sesión</h1>
         <form onSubmit={handleSubmit}>
