@@ -4,10 +4,10 @@ import {
   ADD_TASK,
   TASK_ERROR,
   DELETE_TASK,
-  TASK_STATUS,
   SELECTED_TASK,
   UPDATE_TASK,
   CLEAR_SELECTED_TASK,
+  RESET_TASKS,
 } from "../../types/index";
 
 export default (state, action) => {
@@ -15,15 +15,13 @@ export default (state, action) => {
     case TASKS_PROJECT:
       return {
         ...state,
-        project_tasks: state.tasks.filter(
-          (task) => task.projectId === action.payload
-        ),
+        project_tasks: action.payload,
       };
 
     case ADD_TASK:
       return {
         ...state,
-        tasks: [action.payload, ...state.tasks],
+        project_tasks: [action.payload, ...state.project_tasks],
         task_error: false,
       };
 
@@ -36,15 +34,16 @@ export default (state, action) => {
     case DELETE_TASK:
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.id !== action.payload),
+        project_tasks: state.project_tasks.filter(
+          (task) => task._id !== action.payload._id
+        ),
       };
 
     case UPDATE_TASK:
-    case TASK_STATUS:
       return {
         ...state,
-        tasks: state.tasks.map((task) =>
-          task.id === action.payload.id ? action.payload : task
+        project_tasks: state.project_tasks.map((task) =>
+          task._id === action.payload._id ? action.payload : task
         ),
       };
 
@@ -58,6 +57,14 @@ export default (state, action) => {
       return {
         ...state,
         selected_task: null,
+      };
+
+    case RESET_TASKS:
+      return {
+        ...state,
+        selected_task: null,
+        project_tasks: [],
+        task_error: false,
       };
 
     default:

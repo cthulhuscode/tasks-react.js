@@ -13,6 +13,8 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   // If there is a token it must log in
   useEffect(() => {
     getAuthUser();
+
+    // eslint-disable-next-line
   }, []);
 
   return (

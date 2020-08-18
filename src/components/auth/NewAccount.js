@@ -25,6 +25,8 @@ const NewAccount = (props) => {
     if (msg) {
       showAlert(msg.msg, msg.category);
     }
+
+    // eslint-disable-next-line
   }, [msg, isAuthenticated, props.history]);
 
   // State to login

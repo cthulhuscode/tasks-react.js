@@ -67,8 +67,7 @@ const TaskForm = () => {
       // Add the new task
       addTask({
         ...task,
-        projectId: actualProject.id,
-        status: false,
+        project: actualProject._id,
       });
     } else {
       // Edit task
@@ -77,7 +76,7 @@ const TaskForm = () => {
     }
 
     // Update task list
-    getTasks(actualProject.id);
+    getTasks(actualProject._id);
 
     // Reset the form
     setTask({

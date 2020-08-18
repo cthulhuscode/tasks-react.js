@@ -27,7 +27,7 @@ const TaskList = () => {
 
   // Delete project
   const onClickDelete = () => {
-    deleteProject(actualProject.id);
+    deleteProject(actualProject._id);
   };
 
   return (
@@ -43,7 +43,7 @@ const TaskList = () => {
             {project_tasks.map((task) => (
               <CSSTransition
                 nodeRef={nodeRef}
-                key={task.id}
+                key={task._id}
                 timeout={200}
                 classNames="tarea"
               >
